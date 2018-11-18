@@ -9,15 +9,17 @@ ARG NB_UID
 ENV USER ${NB_USER}
 ENV HOME /home/${NB_USER}
 
+
 RUN adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
     ${NB_USER}
 WORKDIR ${HOME}
 
-RUN pip install cffi_magic whitebox pygis
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y \
-    && echo 'export PATH=$HOME/.cargo/bin:$PATH' >> /home/${NB_USER}/.bashrc
+RUN pip install cffi_magic whitebox
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y 
+    # && echo 'export PATH=$HOME/.cargo/bin:$PATH' >> /home/${NB_USER}/.bashrc
+ENV PATH "$PATH:/home/jovyan/.cargo/bin"
 
 RUN apt-get install git \
     && cd /home/${NB_USER} \
