@@ -16,7 +16,7 @@ RUN adduser --disabled-password \
 WORKDIR ${HOME}
 
 RUN pip install cffi_magic
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y \
     && echo 'export PATH=$HOME/.cargo/bin:$PATH' >> ~/.bashrc
 
 RUN apt-get install git \
