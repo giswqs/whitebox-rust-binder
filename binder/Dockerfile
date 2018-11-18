@@ -17,10 +17,10 @@ WORKDIR ${HOME}
 
 RUN pip install cffi_magic
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y \
-    && echo 'export PATH=$HOME/.cargo/bin:$PATH' >> ~/.bashrc
+    && echo 'export PATH=/home/jovyan/.cargo/bin:$PATH' >> /home/${NB_USER}/.bashrc
 
 RUN apt-get install git \
-    && cd /root \
+    && cd /home/${NB_USER} \
     && git clone https://github.com/jblindsay/whitebox-tools 
 #  && cd /root/tippecanoe \
 #  && make \
