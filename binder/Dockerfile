@@ -15,13 +15,15 @@ RUN adduser --disabled-password \
     ${NB_USER}
 WORKDIR ${HOME}
 
-RUN pip install cffi_magic
+RUN pip install cffi_magic whitebox pygis
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y \
-    && echo 'export PATH=/home/jovyan/.cargo/bin:$PATH' >> /home/${NB_USER}/.bashrc
+    && echo 'export PATH=$HOME/.cargo/bin:$PATH' >> /home/${NB_USER}/.bashrc
 
 RUN apt-get install git \
     && cd /home/${NB_USER} \
-    && git clone https://github.com/jblindsay/whitebox-tools 
+    && git clone https://github.com/jblindsay/whitebox-tools \
+    && git clone https://github.com/giswqs/whitebox-rust-binder \
+    && chown -R ${NB_USER} /home/${NB_USER}
 #  && cd /root/tippecanoe \
 #  && make \
 #  && make install \
